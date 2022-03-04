@@ -1,0 +1,18 @@
+#服务名字
+spring:
+  application:
+    name: elk_study
+  #数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bz_shop?useSSL=false&allowMultiQueries=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+#  elasticsearch: #ES6.x以后
+#    rest:
+#      uris: http://192.168.80.128:9200
+
+#服务端口
+server:
+  port: 9100
