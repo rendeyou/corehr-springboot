@@ -1,8 +1,8 @@
 package com.bjsxt.corehr.mapper;
 
 
-import com.bjsxt.corehr.pojo.TbContentCategory;
-import com.bjsxt.corehr.pojo.TbContentCategoryExample;
+import com.bjsxt.corehr.pojo.po.bzshop.TbContentCategory;
+import com.bjsxt.corehr.pojo.po.bzshop.TbContentCategoryExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

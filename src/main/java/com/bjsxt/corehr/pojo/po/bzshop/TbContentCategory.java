@@ -1,4 +1,6 @@
-package com.bjsxt.corehr.pojo;
+package com.bjsxt.corehr.pojo.po.bzshop;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,8 +18,11 @@ public class TbContentCategory implements Serializable {
 
     private Boolean isParent;
 
+    //TODO JsonFormat注解未生效
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date created;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updated;
 
     public Long getId() {

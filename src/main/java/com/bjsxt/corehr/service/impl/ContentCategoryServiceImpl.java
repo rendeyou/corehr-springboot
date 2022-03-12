@@ -2,8 +2,8 @@ package com.bjsxt.corehr.service.impl;
 
 
 import com.bjsxt.corehr.mapper.TbContentCategoryMapper;
-import com.bjsxt.corehr.pojo.TbContentCategory;
-import com.bjsxt.corehr.pojo.TbContentCategoryExample;
+import com.bjsxt.corehr.pojo.po.bzshop.TbContentCategory;
+import com.bjsxt.corehr.pojo.po.bzshop.TbContentCategoryExample;
 import com.bjsxt.corehr.pojo.dto.TbContentCategoryExt;
 import com.bjsxt.corehr.service.ContentCategoryService;
 import com.bjsxt.corehr.utils.ListConvertUtil;

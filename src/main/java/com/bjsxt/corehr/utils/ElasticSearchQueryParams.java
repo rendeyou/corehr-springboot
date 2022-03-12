@@ -28,6 +28,10 @@ public class ElasticSearchQueryParams<T> implements Serializable {
     private String[] includeFields;
     private String[] excludeFields;
 
+    //私有构造方法，公有获取方法
+    private ElasticSearchQueryParams() {
+    }
+
     //属性获取方法
     public String[] getIndexNames() {
         Objects.requireNonNull(indexNames);
@@ -51,10 +55,7 @@ public class ElasticSearchQueryParams<T> implements Serializable {
         return excludeFields == null ? ArrayUtils.EMPTY_STRING_ARRAY : excludeFields;
     }
 
-    //私有构造方法，公有获取方法
-    private ElasticSearchQueryParams() {
-    }
-
+    //静态方法
     public static <T> Builder<T> builder() {
         return new Builder<>();
     }

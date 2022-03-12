@@ -64,9 +64,6 @@ public class OrgBasePageHandler extends OrgPageHandler {
             flag = false;
             responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
             responseVO.setResponseMsg((String) idMap.get(StringEnum.DESC.getStringName()));
-            map.put(StringEnum.FLAG.getStringName(), flag);
-            map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-            return map;
         }
 
         Map<String, Object> nameMap = this.StringNotNull(org.getName(), "name");
@@ -74,9 +71,6 @@ public class OrgBasePageHandler extends OrgPageHandler {
             flag = false;
             responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
             responseVO.setResponseMsg((String) nameMap.get(StringEnum.DESC.getStringName()));
-            map.put(StringEnum.FLAG.getStringName(), flag);
-            map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-            return map;
         }
 
         Map<String, Object> startDateMap = this.ObjectNotNull(org.getStartDate(), "startDate");
@@ -84,12 +78,10 @@ public class OrgBasePageHandler extends OrgPageHandler {
             flag = false;
             responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
             responseVO.setResponseMsg((String) startDateMap.get(StringEnum.DESC.getStringName()));
-            map.put(StringEnum.FLAG.getStringName(), flag);
-            map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-            return map;
         }
 
         map.put(StringEnum.FLAG.getStringName(), flag);
+        map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
         return map;
     }
 

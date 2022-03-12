@@ -1,15 +1,20 @@
 package com.bjsxt.corehr.controller;
 
+import com.bjsxt.corehr.constant.EsConstant;
+import com.bjsxt.corehr.constant.RedisConstant;
 import com.bjsxt.corehr.constant.enums.OrgPageEnum;
 import com.bjsxt.corehr.constant.enums.ResponseStatusEnum;
 import com.bjsxt.corehr.constant.enums.StringEnum;
 import com.bjsxt.corehr.handler.OrgPageHandler;
 import com.bjsxt.corehr.handler.OrgPageHandlerFactory;
+import com.bjsxt.corehr.pojo.po.org.Org;
 import com.bjsxt.corehr.pojo.req.org.OrgUpdateReq;
 import com.bjsxt.corehr.pojo.vo.ResponseVO;
+import com.bjsxt.corehr.utils.ElasticSearchQueryParams;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,11 +29,56 @@ import java.util.Map;
  * @author: RenDeYou
  * @date: 2021/4/18 22:14
  */
+@Slf4j
 @Api(value = "OrgController", description = "组织控制器")
 @RestController
 @RequestMapping("/orgController")
 public class OrgController {
 
+    /**
+     * @param str
+     * @return com.bjsxt.corehr.pojo.vo.ResponseVO
+     * @description: //测试自定义传参类
+     * @author: RenDeyou
+     * @date: 2022/3/5 12:43
+     */
+    @ApiOperation(value = "elasticSearchQueryParamsTest", notes = "测试自定义传参类")
+    @RequestMapping("/elasticSearchQueryParamsTest")
+    public ResponseVO elasticSearchQueryParamsTest(String str) {
+        ResponseVO responseVO = new ResponseVO();
+        //赋值
+        ElasticSearchQueryParams<Org> elasticSearchQueryParams = ElasticSearchQueryParams.<Org>builder()
+                .indexNames(EsConstant.Org.ORG_INDEX)
+                .typeNames(EsConstant.Org.ORG_TYPE)
+                .clazz(Org.class)
+                .build();
+        //取值
+        log.info("elasticSearchQueryParams.getIndexNames()={}", elasticSearchQueryParams.getIndexNames());
+        log.info("elasticSearchQueryParams.getTypeNames()={}", elasticSearchQueryParams.getTypeNames());
+        log.info("elasticSearchQueryParams.getClazz()={}", elasticSearchQueryParams.getClazz());
+        log.info("elasticSearchQueryParams.getIncludeFields()={}", elasticSearchQueryParams.getIncludeFields());
+        log.info("elasticSearchQueryParams.getExcludeFields()={}", elasticSearchQueryParams.getExcludeFields());
+        return responseVO;
+    }
+
+    /**
+     * @param str
+     * @return com.bjsxt.corehr.pojo.vo.ResponseVO
+     * @description: //测试字符串常量RedisKey拼接
+     * @author: RenDeyou
+     * @date: 2022/3/4 17:25
+     */
+    @ApiOperation(value = "getConstantKey", notes = "获取字符串常量RedisKey")
+    @RequestMapping("/getConstantKey")
+    public ResponseVO getConstantKey(String str) {
+        ResponseVO responseVO = new ResponseVO();
+        String communicationKey = RedisConstant.getRedisKey(RedisConstant.Org.ORG_CONDITION_MAP_KEY, "communication");
+        log.info("communicationKey={}", communicationKey);
+        String locationKey = RedisConstant.getRedisKey(RedisConstant.Org.ORG_CONDITION_MAP_KEY, "location");
+        System.out.println("locationKey = " + locationKey);
+        log.info("locationKey={}", locationKey);
+        return responseVO;
+    }
 
     /**
      * {
@@ -117,9 +167,6 @@ public class OrgController {
                 flag = false;
                 responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
                 responseVO.setResponseMsg(ResponseStatusEnum.CHECK_ERROR.getResponseMsg());
-                map.put(StringEnum.FLAG.getStringName(), flag);
-                map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-                return map;
             }
         }
 
@@ -129,9 +176,6 @@ public class OrgController {
             flag = false;
             responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
             responseVO.setResponseMsg("组织信息集处理器类型orgPageId不存在");
-            map.put(StringEnum.FLAG.getStringName(), flag);
-            map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-            return map;
         }
         //获取组织信息集处理器
         OrgPageHandler orgPageHandler = OrgPageHandlerFactory.getOrgPageHandler(orgPageEnum);
@@ -139,12 +183,10 @@ public class OrgController {
             flag = false;
             responseVO.setResponseCode(ResponseStatusEnum.CHECK_ERROR.getResponseCode());
             responseVO.setResponseMsg("组织信息集处理器类型OrgPageEnum不存在");
-            map.put(StringEnum.FLAG.getStringName(), flag);
-            map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
-            return map;
         }
 
         map.put(StringEnum.FLAG.getStringName(), flag);
+        map.put(StringEnum.RESPONSE_VO.getStringName(), responseVO);
         map.put(StringEnum.ORG_PAGE_HANDLER.getStringName(), orgPageHandler);
         return map;
     }
