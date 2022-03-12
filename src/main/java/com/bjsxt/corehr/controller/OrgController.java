@@ -43,7 +43,7 @@ public class OrgController {
      * @date: 2022/3/5 12:43
      */
     @ApiOperation(value = "elasticSearchQueryParamsTest", notes = "测试自定义传参类")
-    @RequestMapping("/elasticSearchQueryParamsTest")
+    @PostMapping("/elasticSearchQueryParamsTest")
     public ResponseVO elasticSearchQueryParamsTest(String str) {
         ResponseVO responseVO = new ResponseVO();
         //赋值
@@ -69,7 +69,7 @@ public class OrgController {
      * @date: 2022/3/4 17:25
      */
     @ApiOperation(value = "getConstantKey", notes = "获取字符串常量RedisKey")
-    @RequestMapping("/getConstantKey")
+    @PostMapping("/getConstantKey")
     public ResponseVO getConstantKey(String str) {
         ResponseVO responseVO = new ResponseVO();
         String communicationKey = RedisConstant.getRedisKey(RedisConstant.Org.ORG_CONDITION_MAP_KEY, "communication");
