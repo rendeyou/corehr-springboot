@@ -1,6 +1,5 @@
 package com.bjsxt.corehr.controller;
 
-import com.bjsxt.corehr.config.NotInSwagger;
 import com.bjsxt.corehr.pojo.dto.TbContentCategoryExt;
 import com.bjsxt.corehr.service.ContentCategoryService;
 import io.swagger.annotations.Api;
@@ -18,7 +17,7 @@ import java.util.List;
  * @author: RenDeYou
  * @date: 2021/4/21 17:30
  */
-@NotInSwagger //排除类：自定义注解，不显示在Swagger中
+//@NotInSwagger //排除类：自定义注解，不显示在Swagger中
 @Api(value = "ContentCategoryController", description = "内容类别控制器")
 @RestController
 @RequestMapping("/service/contentCategory")
